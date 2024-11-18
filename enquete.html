@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skinzinha?</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 150px;
+            margin: 0;
+    
+        }
+
+        #ocultar {
+            display: none !important;
+        }
+
+        .no {
+            transform: translate();
+            transition: transform 0.2s;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            object-fit: cover;
+            min-height: 100vh;
+        }
+
+        #videoA {
+            position: fixed;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            align-items: center;
+            height: 40px;
+            width: 90px;
+            font-size: 14px;
+        }
+
+        #block {
+            top: 0;
+            left: 0;
+            width: 500px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (max-width: 412px) {
+            #block {
+                gap: 15px;
+            }
+
+            #block {
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            button {
+                width: 80px;
+                height: 35px;
+                font-size: 12px;
+            }
+
+            .no {
+                max-width: 100%; /* Evita que o botão saia da tela */
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="videoA">
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExczlmMXhwdnc1NnJqa2djdTZ3enh3dnJ0YndscTF3ajAxZnR5aThqMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cCy9uBtngzMd5rCo4q/giphy.webp" alt="Animação WebP">
+        <h1>ENQUETE CLASH OF DROGAS!!!!</h1>
+        <h2>Qual o melhor tipo de ataque?</h2>
+        <div id="block">
+            <div id="yes">
+                <button onclick="aceito()">Terrestre</button>
+            </div>
+            <div onmouseover="rejeito()" onmousemove="rejeito()" onmouseenter="rejeito()" class="no">
+                <button>Aéreo</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    var block = document.querySelector('#block');
+    var h2 = document.querySelector('h2');
+    var nao = document.querySelector('.no');
+    var buttonWidth = 90; // Largura do botão "Aéreo"
+    var buttonHeight = 40; // Altura do botão "Aéreo"
+
+    function aceito() {
+        event.preventDefault();
+        block.setAttribute('id', 'ocultar');
+        h2.innerHTML = "Obrigado pelo seu voto, já somos mais de 5000!!!";
+    }
+
+    function rejeito() {
+        // Obter as dimensões do contêiner #block
+        var blockRect = block.getBoundingClientRect();
+        var maxX = blockRect.width - buttonWidth;
+        var maxY = blockRect.height - buttonHeight;
+
+        // Garantir que o valor x e y esteja dentro dos limites de #block
+        var x = Math.floor(Math.random() * maxX);
+        var y = Math.floor(Math.random() * maxY);
+        console.log(maxX,maxY,x,y,blockRect);
+        // Ajustar a posição com base na posição do contêiner
+        nao.style.transform = `translate(${x}px, ${y}px)`;
+    }
+</script>
+</html>
